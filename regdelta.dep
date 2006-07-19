@@ -1,0 +1,48 @@
+# Microsoft Developer Studio Generated Dependency File, included by regdelta.mak
+
+.\regdelta.cpp : \
+	".\regdelta.h"\
+	".\RegFile.h"\
+	".\RegFileReader.h"\
+	".\RegFileWriter.h"\
+	".\version.h"\
+	{$(INCLUDE)}"debug.h"\
+	{$(INCLUDE)}"Optimize.h"\
+	{$(INCLUDE)}"Stackwalker.h"\
+	{$(INCLUDE)}"SystemMessage.h"\
+	{$(INCLUDE)}"tgetopt.h"\
+	{$(INCLUDE)}"tstl.h"\
+	{$(INCLUDE)}"ver_defaults.h"\
+	
+
+.\RegFile.cpp : \
+	".\regdelta.h"\
+	".\RegFile.h"\
+	".\RegValue.h"\
+	{$(INCLUDE)}"SystemMessage.h"\
+	{$(INCLUDE)}"tstl.h"\
+	
+
+.\RegFileReader.cpp : \
+	".\regdelta.h"\
+	".\RegFile.h"\
+	".\RegFileReader.h"\
+	{$(INCLUDE)}"tstl.h"\
+	
+
+.\RegFileWriter.cpp : \
+	".\regdelta.h"\
+	".\RegFile.h"\
+	".\RegFileWriter.h"\
+	{$(INCLUDE)}"tstl.h"\
+	
+
+.\RegValue.cpp : \
+	".\RegValue.h"\
+	
+
+.\regdelta.rc : \
+	".\regdelta.ico"\
+	".\version.h"\
+	{$(INCLUDE)}"ver_defaults.h"\
+	
