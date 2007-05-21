@@ -1,0 +1,44 @@
+REGEDIT4
+
+[HKEY_CURRENT_USER\reg_delta]
+"null"=""
+"binary"=hex:
+"dword"=dword:00000000
+"binary_000102ff"=hex:00,01,02,ff
+"dword_01020304"=dword:01020304
+"multistring"=hex(7):00
+"multistring_abc"=hex(7):61,62,63,00,64,65,66,00,00
+"expandsz"=hex(2):00
+"expandsz_abc"=hex(2):61,62,63,00
+"expandsz_path"=hex(2):25,70,61,74,68,25,00
+@="default"
+"string with quote"="a quote\"aaa"
+"\"quote\" key"="\"quoted value\""
+"\\slash"="\\"
+"really_long_string"="123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+"binary_01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"=hex:00,\
+  01
+"binary2_22"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,\
+  21,22
+"binary2_21"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,\
+  21
+"binary2_20"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20
+"binary_23"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,\
+  22,23
+"binary_22"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,\
+  22
+"binary_21"=hex:01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21
+"asdfl;kj"=""
+"equals\"=\""="=value"
+"test"=hex(2):25,50,72,6f,67,72,61,6d,46,69,6c,65,73,25,00
+
+[HKEY_CURRENT_USER\reg_delta\"quoted key"]
+
+[HKEY_CURRENT_USER\reg_delta\equals=]
+
+[HKEY_CURRENT_USER\reg_delta\subkey]
+"string"="1"
+@="default"
+
+[HKEY_CURRENT_USER\reg_delta\[help]]
+

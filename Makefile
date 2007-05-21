@@ -14,7 +14,8 @@
 
 VER?=$(shell perl -n -e '/define\s+VER_STRING2\s+"(.*)"/ && print $$1' version.h)
 APP?=$(shell perl -n -e '/define\s+VER_INTERNAL_NAME\s+"(.*)"/ && print $$1' version.h)
-MSVC_DIR?=/cygdrive/c/PROGRA~1/MICROS~4/VC98
+VC98?=$(PROGRAMFILES)\\Microsoft Visual Studio\\VC98
+MSVC_DIR?=$(shell cygpath -u `cygpath -ds "$(VC98)"`)
 CYGENV=MAKEFLAGS="" PATH=$(MSVC_DIR)/bin:$$PATH
 APP_ZIP?=$(APP)-$(VER)-win32.zip
 SRC_ZIP?=$(APP)-$(VER)-win32-src.zip
@@ -22,7 +23,7 @@ ZIP?=zip
 ZIP_OPTS?=-9jquX
 CWD=$(shell pwd)
 APP_FILES=Release/$(APP).exe Release_Unicode/$(APP)U.exe changelog.txt COPYING readme.txt 
-SRC_FILES=$(APP_FILES) Makefile $(shell ls *.cpp *.c *.h *.hpp *.ico *.inl *.rc *.dsp *.dsw *.mak *.dep *.sh ?[ab].reg auto_regedit.* 2>nul)
+SRC_FILES=$(APP_FILES) Makefile $(shell ls *.cpp *.c *.h *.hpp *.ico *.inl *.rc *.dsp *.dsw *.mak *.dep *.sh ?[ab].reg auto_regedit.* 2>/dev/null)
 
 .PHONY:	dist
 dist:	all $(APP_ZIP) $(SRC_ZIP)

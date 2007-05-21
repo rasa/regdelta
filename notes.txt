@@ -1,0 +1,17 @@
+
+/*
+http://msdn.microsoft.com/library/default.asp?url=/library/en-us/Kernel_r/hh/Kernel_r/k111_08954f01-0f74-4054-a52a-b00fff0dc166.xml.asp
+
+REG_BINARY 	Binary data in any form.
+REG_DWORD 	A 4-byte numerical value.
+REG_DWORD_LITTLE_ENDIAN 	A 4-byte numerical value with the least significant byte at the lowest address. Identical to REG_DWORD.
+REG_DWORD_BIG_ENDIAN 	A 4-byte numerical value with the least significant byte at the highest address.
+REG_EXPAND_SZ 	A null-terminated Unicode string that contains unexpanded references to environment variables, such as "%PATH%".
+REG_LINK 	A Unicode string that names a symbolic link. This type is irrelevant to device and intermediate drivers.
+REG_MULTI_SZ 	An array of null-terminated strings, terminated by another zero.
+REG_NONE 	Data with no particular type.
+REG_SZ 	A null-terminated Unicode string.
+REG_RESOURCE_LIST 	A device driver's list of hardware resources, used by the driver or one of the physical devices it controls, in the \ResourceMap tree
+REG_RESOURCE_REQUIREMENTS_LIST 	A device driver's list of possible hardware resources it or one of the physical devices it controls can use, from which the system writes a subset into the \ResourceMap tree
+REG_FULL_RESOURCE_DESCRIPTOR 	A list of hardware resources that a physical device is using, detected and written into the \HardwareDescription tree by the system
+*/
