@@ -70,6 +70,7 @@ This removes the value named "Test", but leaves the key "Test" in place.
 */
 
 #pragma warning(disable:4786)
+#pragma comment(lib, "advapi32")
 
 #ifndef WIN32_LEAN_AND_MEAN
 # define WIN32_LEAN_AND_MEAN 1
@@ -135,7 +136,7 @@ static TCHAR *progname(const TCHAR *argv0);
 struct _opt {
 	bool all;
 	TCHAR *execute;
-	bool export;
+	bool o_export;
 	TCHAR *output;
 	bool comments;
 	bool quirks;
@@ -337,7 +338,7 @@ int export2(const int argc, TCHAR *const *argv, int toptind, const TCHAR *output
 	return rv;
 }
 
-int export(int argc, TCHAR *const *argv, int toptind) {
+int do_export(int argc, TCHAR *const *argv, int toptind) {
 	DWORD rv = 0;
 
 	TCHAR *output_file;
@@ -725,7 +726,7 @@ int _tmain(int argc, TCHAR *const *argv) {
 		switch (c) {
 			case 'a':	// all
 				opt.all = true;
-				opt.export = true;
+				opt.o_export = true;
 				break;
 /*
 			case 'e':	// execute
@@ -771,7 +772,7 @@ int _tmain(int argc, TCHAR *const *argv) {
 				break;
 
 			case 'x':	// export
-				opt.export = true;
+				opt.o_export = true;
 				break;
 
 			case 'V': // version
@@ -806,8 +807,8 @@ int _tmain(int argc, TCHAR *const *argv) {
 		return execute(argc, argv, toptind);
 	}
 
-	if (opt.export) {
-		return export(argc, argv, toptind);
+	if (opt.o_export) {
+		return do_export(argc, argv, toptind);
 	}
 
 	if (opt.sort) {

@@ -15,12 +15,14 @@ General Public License for more details.
 
 */
 
+
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
 #ifdef _MSC_VER
 #pragma warning(disable:4786)
+#pragma warning(disable:4996)
 #endif
 
 #ifndef WIN32_LEAN_AND_MEAN
@@ -332,7 +334,7 @@ void RegFile::_write_bytes(const BYTE *bytes, const DWORD length, DWORD output_p
 
 	output_pos += 2;
 
-	for (int i = 1; i < length; ++i) {
+	for (int i = 1; i < (int) length; ++i) {
 		assert(tpos < tsize);
 		tchars[tpos++] = ',';
 		//_write_file(comma, comma_len);
@@ -388,7 +390,7 @@ DWORD RegFile::_write_estring(const TCHAR *s) {
 	DWORD tpos = 0;
 	
 	int rv = length;
-	for (int i = 0; i < length; ++i) {
+	for (int i = 0; i < (int) length; ++i) {
 		TCHAR c = s[i];
 		if (quirks) {
 			if (c == '\r') {
@@ -708,7 +710,7 @@ DWORD RegFile::_write_subkeys(const HKEY hKey, const TCHAR *root, const DWORD nu
 
 	String_String_Map key_map;
 
-	for (int i = 0; i < num_sub_keys; ++i) { 
+	for (int i = 0; i < (int) num_sub_keys; ++i) { 
 		DWORD sub_key_len;
 
 		sub_key_len = max_sub_key_len;
