@@ -1,20 +1,4 @@
-/*
-
-$Id$
-
-Copyright (c) 2005-2006 Ross Smith II (http://smithii.com). All rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of version 2 of the GNU General Public License 
-as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-
-*/
-
+// Copyright (c) 2005-2015 Ross Smith II. See Mit LICENSE in /LICENSE
 
 #if _MSC_VER > 1000
 #pragma once
@@ -130,7 +114,7 @@ int RegFile::_open(const TCHAR *filename, const DWORD dwDesiredAccess, const DWO
 			return 0;
 		}
 	}
-	
+
 	fh = CreateFile(
 		this->filename,
 		dwDesiredAccess,
@@ -239,7 +223,7 @@ TCHAR *RegFile::readline() {
 
 	buffer[pos] = '\0';
 	pos += sizeof(TCHAR);
-	
+
 	_length = buffer + pos - rv;
 	return rv;
 }
@@ -329,7 +313,7 @@ void RegFile::_write_bytes(const BYTE *bytes, const DWORD length, DWORD output_p
 
 	tchars[tpos++] = hex_chars[bytes[0]][0];
 	tchars[tpos++] = hex_chars[bytes[0]][1];
-	
+
 //	_write_file(hex_chars[bytes[0]], 2);
 
 	output_pos += 2;
@@ -388,7 +372,7 @@ DWORD RegFile::_write_estring(const TCHAR *s) {
 
 	TCHAR *tchars = new TCHAR[length * 2];
 	DWORD tpos = 0;
-	
+
 	int rv = length;
 	for (int i = 0; i < (int) length; ++i) {
 		TCHAR c = s[i];
@@ -451,7 +435,7 @@ int RegFile::_write_reg_value(const DWORD reg_type, const BYTE *value_data, cons
 			_write_file(hex, hex_len);
 			_write_bytes(value_data, value_data_len, output_pos + 4);
 			break;
-			
+
 		case REG_DWORD:
 			_write_file(dword, dword_len);
 #if REG_DWORD == REG_DWORD_LITTLE_ENDIAN
@@ -466,7 +450,7 @@ int RegFile::_write_reg_value(const DWORD reg_type, const BYTE *value_data, cons
 			_write_byte(value_data[3]);
 #endif
 			break;
-			
+
 #if REG_DWORD != REG_DWORD_LITTLE_ENDIAN
 		case REG_DWORD_LITTLE_ENDIAN:
 			_write_file(dword, dword_len);
@@ -520,7 +504,7 @@ int RegFile::_write_reg_value(const DWORD reg_type, const BYTE *value_data, cons
 	return ERROR_SUCCESS;
 }
 
-DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) { 
+DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 	const static TCHAR *lbracket		= _T("[");
 	const static DWORD lbracket_len		= _tcslen(lbracket);
 	const static TCHAR *bs				= _T("\\");
@@ -542,7 +526,7 @@ DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 		return 0;
 
 	HKEY hSubKey = 0;
-	
+
 	DWORD rv = RegOpenKeyEx(hKey, root, 0, KEY_READ | KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS, &hSubKey);
 	if (rv != ERROR_SUCCESS) {
 		if (verbose || rv != ERROR_ACCESS_DENIED)
@@ -554,7 +538,7 @@ DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 
 	while (1) {
 		_write_file(lbracket, lbracket_len);
-		
+
 		_write_file(hkey_name[hKey].c_str(), hkey_name[hKey].length());
 
 		if (root) {
@@ -571,18 +555,18 @@ DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 		DWORD    security_descriptor	= 0;
 
 		rv = RegQueryInfoKey(
-			hSubKey,                // key handle 
-			NULL,                   // buffer for class name 
-			NULL,                   // size of class string 
-			NULL,                   // reserved 
-			&num_sub_keys,          // number of subkeys 
-			&max_sub_key_len,       // longest subkey size 
-			NULL,                   // longest class string 
-			&num_values,            // number of values for this key 
-			&max_value_len,         // longest value name 
-			&max_value_data_len,    // longest value data 
-			&security_descriptor,   // security descriptor 
-			NULL);                  // last write time 
+			hSubKey,                // key handle
+			NULL,                   // buffer for class name
+			NULL,                   // size of class string
+			NULL,                   // reserved
+			&num_sub_keys,          // number of subkeys
+			&max_sub_key_len,       // longest subkey size
+			NULL,                   // longest class string
+			&num_values,            // number of values for this key
+			&max_value_len,         // longest value name
+			&max_value_data_len,    // longest value data
+			&security_descriptor,   // security descriptor
+			NULL);                  // last write time
 
 		if (rv != ERROR_SUCCESS) {
 			_ftprintf(stderr, _T("Cannot query key %s\\%s: Error %u: %s"), hkey_name[hKey], root ? root : empty_string, rv, SystemMessage(rv));
@@ -615,11 +599,11 @@ DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 			DWORD value_len = max_value_len;
 
 			rv = RegEnumValue(
-				hSubKey, 
-				i, 
-				value_name, 
-				&value_len, 
-				NULL, 
+				hSubKey,
+				i,
+				value_name,
+				&value_len,
+				NULL,
 				&reg_type,
 				value_data,
 				&_value_data_len);
@@ -672,7 +656,7 @@ DWORD RegFile::writeValues(const HKEY hKey, const TCHAR *root) {
 				_ftprintf(stderr, _T("Unknown registry type %d for %s\\%s"), value_node->value_type, hkey_name[hKey], root ? root : empty_string);
 				break;
 			}
-			
+
 			_write_file(eol, eol_len);
 		}
 
@@ -710,7 +694,7 @@ DWORD RegFile::_write_subkeys(const HKEY hKey, const TCHAR *root, const DWORD nu
 
 	String_String_Map key_map;
 
-	for (int i = 0; i < (int) num_sub_keys; ++i) { 
+	for (int i = 0; i < (int) num_sub_keys; ++i) {
 		DWORD sub_key_len;
 
 		sub_key_len = max_sub_key_len;
@@ -718,14 +702,14 @@ DWORD RegFile::_write_subkeys(const HKEY hKey, const TCHAR *root, const DWORD nu
 		ZeroMemory(sub_key_name, sub_key_len);
 
 		rv = RegEnumKeyEx(
-			hSubKey, 
-			i, 
-			sub_key_name, 
+			hSubKey,
+			i,
+			sub_key_name,
 			&sub_key_len,
-			NULL, 
-			NULL, 
-			NULL, 
-			NULL); 
+			NULL,
+			NULL,
+			NULL,
+			NULL);
 
 		if (rv == ERROR_NO_MORE_ITEMS) {
 			rv = ERROR_SUCCESS;
@@ -738,7 +722,7 @@ DWORD RegFile::_write_subkeys(const HKEY hKey, const TCHAR *root, const DWORD nu
 			_ftprintf(stderr, _T("i=%u, sub_key_len=%u, sub_key_name=%s\n"), i, sub_key_len, sub_key_name);
 #endif
 			break;
-		} 
+		}
 
 		if (sub_key_len <= MAX_KEY_NAME_LENGTH)
 			sub_key_name[sub_key_len] = '\0';
@@ -760,7 +744,7 @@ DWORD RegFile::_write_subkeys(const HKEY hKey, const TCHAR *root, const DWORD nu
 
 	if (rv != ERROR_SUCCESS) {
 		return rv;
-	} 
+	}
 
 	for (String_String_Map::const_iterator it = key_map.begin(); it != key_map.end(); ++it) {
 		tstring sub_key_name = (tstring) it->second;
