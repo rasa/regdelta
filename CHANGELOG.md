@@ -1,9 +1,12 @@
-regdelta changelog
+## 0.3 (unreleased)
 
-Version 1.2 - 12 Jul 06:
+  * Updated to Visual Studio 2013
+  * Switch to MIT license
 
-	Standardized version information across all programs
+## 0.2 (12 Jul 06)
 
-Version 0.1 - 09 Jun 06:
+  * Standardized version information across all programs
 
-	Initial release
+## 0.1 (09 Jun 06)
+
+  * Initial release
