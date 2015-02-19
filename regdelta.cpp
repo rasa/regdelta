@@ -705,6 +705,10 @@ int _tmain(int argc, TCHAR *const *argv) {
 
 		c = tgetopt_long(argc, argv, short_options, long_options, &option_index);
 
+		if (topterr) {
+			usage(1);
+		}
+
 		if (c == -1)
 			break;
 

@@ -1,22 +1,11 @@
-# Makefile to build regdelta
-# Copyright (c) 2004-2006 Ross Smith II (http://smithii.com). All rights reserved.
-# 
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of version 2 of the GNU General Public License 
-# as published by the Free Software Foundation.
-# 
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# General Public License for more details.
-# 
-# $Id$
+# regdelta
 
 VER?=$(shell perl -n -e '/define\s+VER_STRING2\s+"(.*)"/ && print $$1' version.h)
 APP?=$(shell perl -n -e '/define\s+VER_INTERNAL_NAME\s+"(.*)"/ && print $$1' version.h)
-APP_FILES=Release/$(APP).exe Release_Unicode/$(APP)U.exe changelog.txt COPYING readme.txt 
-SRC_FILES=$(APP_FILES) Makefile $(shell ls *.cpp *.dep *.dsp *.dsw *.h *.ico *.mak *.rc *.sh ?[ab].reg auto_regedit.* 2>/dev/null)
-
+APP_FILES=CHANGELOG.md LICENSE README.md $(wildcard Release/*.exe)
+APP_FILES+=$(wildcard *.exe Release_Unicode/*U.exe)
+SRC_FILES=$(APP_FILES) $(wildcard Makefile *.cpp *.dep *.dsp *.dsw *.h *.ico *.mak *.rc  *.sln *.vcproj *.vcxproj *.vcxproj.filters)
+SRC_FILES+=$(wildcard  *.au3 ?[ab].reg *.sh)
 APP_ZIP?=$(APP)-$(VER)-win32.zip
 SRC_ZIP?=$(APP)-$(VER)-win32-src.zip
 ZIP?=zip
@@ -27,22 +16,20 @@ dist:	all $(APP_ZIP) $(SRC_ZIP)
 
 $(APP_ZIP):	$(APP_FILES)
 	-rm -f $(APP_ZIP)
-	chmod a+x $^
+	chmod +x $^
 	${ZIP} ${ZIP_OPTS} $@ $^
 
 $(SRC_ZIP):	$(SRC_FILES)
 	-rm -f $(SRC_ZIP)
-	chmod a+x $^
+	chmod +x $^
 	${ZIP} ${ZIP_OPTS} $@ $^
-
-.PHONY: install
-install: all
-	cp -pf Debug/$(APP).exe Debug_Unicode/$(APP)U.exe regdiff.cmd /cygdrive/c/bin
 
 .PHONY:	distclean
 distclean:	clean
 	rm -f $(APP_ZIP) $(SRC_ZIP)
 
-.PHONY:	all clean realclean
-
+ifneq (,$(shell which MSBuild.exe 2>/dev/null))
+include msbuild.mak
+else
 include nmake.mak
+endif
