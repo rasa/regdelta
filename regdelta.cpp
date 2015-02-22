@@ -771,14 +771,6 @@ int _tmain(int argc, TCHAR *const *argv) {
 #endif
 				);
 				_tprintf(APPCOPYRIGHT);
-				_tprintf(_T("\n\n"));
-
-				_tprintf(
-					_T("This program is distributed in the hope that it will be useful,\n")
-					_T("but WITHOUT ANY WARRANTY; without even the implied warranty of\n")
-					_T("MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n")
-					_T("GNU General Public License for more details.\n")
-				);
 
 				exit(0);
 				break;
@@ -786,6 +778,10 @@ int _tmain(int argc, TCHAR *const *argv) {
 			case '?': // help
 				usage(0);
 				break;
+
+			case ':':
+				_ftprintf(stderr, _T("Option -%c requires an operand\n"), toptopt);
+				// fallthrough
 
 			default:
 				usage(1);
