@@ -1,6 +1,6 @@
-# regdelta 
+# regdelta [![Flattr this][flatter_png]][flatter]
 
-Diff, export, and sort Windows registry files
+Diff, export, and sort Windows registry files.
 
 ## Usage
 
@@ -31,7 +31,7 @@ Options:
  regdelta -ax allkeys.reg            ; export all keys to allkeys.reg
 ````
 
-## Notes 
+## Notes
 
 ````
 regdelta.exe  reads and writes ASCII .reg files (Windows 9x/NT 4)
@@ -39,10 +39,10 @@ regdeltau.exe reads and writes Unicode .reg files (Windows 2000/XP/2003)
 
 'key' can be one of the following:
 
-HKCC	HKEY_CURRENT_CONFIG 
-HKCU	HKEY_CURRENT_USER 
-HKCR	HKEY_CLASSES_ROOT 
-HKLM	HKEY_LOCAL_MACHINE 
+HKCC	HKEY_CURRENT_CONFIG
+HKCU	HKEY_CURRENT_USER
+HKCR	HKEY_CLASSES_ROOT
+HKLM	HKEY_LOCAL_MACHINE
 HKU		HKEY_USERS
 ````
 
@@ -87,18 +87,25 @@ To contribute to this project, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Bugs
 
-To view existing bugs, or report a new bug, please see the [issues](/issues) page for this project.
+To view existing bugs, or report a new bug, please see [issues](../../issues).
+
+## Changelog
+
+To view the version history for this project, please see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
 This project is [MIT licensed](LICENSE).
 
-## Changelog
-
-Please see [CHANGELOG.md](CHANGELOG.md) for the version history for this project.
-
 ## Contact
 
-This project was originally developed by [Ross Smith II](mailto:ross@smithii.com).
-Any enhancements and suggestions are welcome.
+This project was created and is maintained by [Ross Smith II][] [![endorse][endorse_png]][endorse]
+
+Feedback, suggestions, and enhancements are welcome.
+
+[Ross Smith II]: mailto:ross@smithii.com "ross@smithii.com"
+[flatter]: https://flattr.com/submit/auto?user_id=rasa&url=https%3A%2F%2Fgithub.com%2Frasa%2Fregdelta
+[flatter_png]: http://button.flattr.com/flattr-badge-large.png "Flattr this"
+[endorse]: https://coderwall.com/rasa
+[endorse_png]: https://api.coderwall.com/rasa/endorsecount.png "endorse"
 
