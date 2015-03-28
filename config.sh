@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DIR16=Debug_Unicode
 DIR8=Debug

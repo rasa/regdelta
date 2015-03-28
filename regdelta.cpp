@@ -61,21 +61,18 @@ This removes the value named "Test", but leaves the key "Test" in place.
 # define WIN32_LEAN_AND_MEAN 1
 #endif
 
-#include <assert.h>
-#include <tchar.h>
-#include <tstl.h>
+//#include <assert.h>
+//#include <tchar.h>
+//#include <tstl.h>
 #include <windows.h>
-#include <conio.h>
+//#include <conio.h>
 
-#include <algorithm>
+//#include <algorithm>
 #include <map>
 #include <sstream>
 #include <string>
 
-#include "Stackwalker.h"
-#include "Optimize.h"
 #include "SystemMessage.h"
-#include "debug.h"
 
 #include "tgetopt.h"
 
